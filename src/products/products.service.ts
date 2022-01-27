@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
 import { Product } from './product.model';
 import { CreateProductDto } from './dto/create-product.input';
+import { UpdateProductDto } from './dto/update-product.input';
 
 @Injectable()
 export class ProductsService {
@@ -10,7 +11,7 @@ export class ProductsService {
     private readonly productModel: typeof Product,
   ) {}
 
-  create(createProductDto: CreateProductDto): Promise<Product> {
+  createProduct(createProductDto: CreateProductDto): Promise<Product> {
     return this.productModel.create({ ...createProductDto });
   }
 
@@ -28,10 +29,10 @@ export class ProductsService {
 
   updateProduct(
     productId: string,
-    createProductDto: CreateProductDto,
+    updateProductDto: UpdateProductDto,
   ): Promise<[number, Product[]]> {
     return this.productModel.update(
-      { ...createProductDto },
+      { ...updateProductDto },
       {
         where: {
           productId: productId,

@@ -49,9 +49,11 @@ export class Product extends Model {
   subcategory: string;
 
   @CreatedAt
+  @Column({ defaultValue: DataType.NOW })
   createdAt: Date;
 
   @UpdatedAt
+  @Column({ defaultValue: DataType.NOW })
   updatedAt: Date;
 
   @Column({ defaultValue: true })

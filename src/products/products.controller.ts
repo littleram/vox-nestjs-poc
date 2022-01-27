@@ -1,6 +1,7 @@
 import { Product } from './product.model';
 import { ProductsService } from './products.service';
 import { CreateProductDto } from './dto/create-product.input';
+import { UpdateProductDto } from './dto/update-product.input';
 import {
   Body,
   Controller,
@@ -26,8 +27,8 @@ export class ProductsController {
   @Post()
   @ApiOperation({ summary: 'Add a new Product to the database' })
   @ApiBadRequestResponse({ description: 'Invalid input' })
-  create(@Body() createProductDto: CreateProductDto): Promise<Product> {
-    return this.productsService.create(createProductDto);
+  createProduct(@Body() createProductDto: CreateProductDto): Promise<Product> {
+    return this.productsService.createProduct(createProductDto);
   }
 
   @Get('/')
@@ -49,9 +50,9 @@ export class ProductsController {
   @Patch(':id')
   @ApiOperation({ summary: 'Update specified fields in an existing Product' })
   @ApiNotFoundResponse({ description: 'Product not found' })
-  update(
+  updateProduct(
     @Param('id') productId: string,
-    @Body() updateUserDto: CreateProductDto,
+    @Body() updateUserDto: UpdateProductDto,
   ) {
     return this.productsService.updateProduct(productId, updateUserDto);
   }
